@@ -6,16 +6,16 @@
 class Offer extends Database {
 
     public function createOffer($user_id, $description, $proposal_id) {
-    // Check if user already made an offer for this proposal
+    
     $sql = "SELECT * FROM offers WHERE user_id = ? AND proposal_id = ?";
     $existing = $this->executeQuerySingle($sql, [$user_id, $proposal_id]);
 
     if ($existing) {
-        // Already submitted once
+       
         return false;
     }
 
-    // If not yet submitted, insert new offer
+    
     $sql = "INSERT INTO offers (user_id, description, proposal_id) VALUES (?, ?, ?)";
     return $this->executeNonQuery($sql, [$user_id, $description, $proposal_id]);
     }
